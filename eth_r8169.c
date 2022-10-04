@@ -7,6 +7,8 @@
 #include <linux/socket.h>
 #include <linux/ethtool.h>
 
+#include "eth_r8169.h"
+
 #define R8169_REGS_SIZE     256
 #define BAR_MAX             6
 #define BAR0_OFFSET         0x10
@@ -158,9 +160,18 @@ static int rt_stop(struct net_device *dev)
 
 static netdev_tx_t rt_start_xmit(struct sk_buff *buff, struct net_device *dev)
 {
-    netdev_tx_t tx;
-    // pr_info("%s DEV:%s\n", __FUNCTION__, dev->name);
-    return tx;
+    static u32 count = 0;
+    // netdev_tx_t tx - NETDEV_TX_OK and others NETDEV_TX_XXX
+    u8 nr_frags = skb_shinfo(buff)->nr_frags;
+    
+    pr_info("%d %s DEV:%s nr_frags %d\n",count, __FUNCTION__, dev->name, nr_frags);
+
+    for(u8 cur = 0; cur < nr_frags; cur++)
+    {
+    }
+
+    count++;
+    return NETDEV_TX_OK;
 }
 
 static void rt_get_stats64(struct net_device *dev, struct rtnl_link_stats64 *stats)
