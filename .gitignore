@@ -1,0 +1,13 @@
+*.swp
+*.swo
+*.cmd
+*.ko
+*.mod.*
+*.o
+.git
+*.mod
+*.vim
+*.order
+*.symvers
+*.swn
+

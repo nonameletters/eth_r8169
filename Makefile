@@ -1,4 +1,7 @@
-obj-m += eth_r8169.o
+obj-m += nn_r8169.o
+
+nn_r8169-objs := eth_r8169.o eth_tool.o
+
 KBUILD_CFLAGS+="-std=gnu99"
 
 all:
